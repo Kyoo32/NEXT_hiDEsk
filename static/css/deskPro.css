@@ -1,0 +1,153 @@
+body {
+	position: relative;;
+	margin: 0;
+
+	/*   //for design
+	background-image: url("/static/background2.png");
+	background-repeat: repeat;
+	background-size: contain;
+	*/
+}
+
+a{
+	color: #526C6A;
+}
+/*header - start */
+#header {
+	position: relative;
+	top: 0;
+	left: 0;
+	
+	/* //for design
+	background-color: rgba(255, 255, 255, 0.1);
+	*/
+	height: 100px;
+	z-index: 100;
+}
+
+#project-name {
+	position: absolute;
+	bottom: 0;
+	right: 10vw;
+	width: 100%;
+	height: 75px;
+	line-height: 75px;
+
+	overflow: hidden;
+
+	color: 272822;
+	text-align: right;
+	font-size: 50px;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	font-style: oblique;
+
+
+}
+/*header - end*/
+
+/*main - start*/
+#container{
+	/*container for concrete size*/
+	position: relative;
+	margin: 0;
+	width: 100vw;
+	height: 60vw;
+}
+
+#deskImage-container {
+	/*container for ratio size*/
+	position: relative;
+	margin: 0 auto;
+	
+	width: 80%;
+	height: 100%;
+}
+.icon-sudo-hover{
+	/*sudo div having depth for buttons */
+	position: absolute;
+	margin: 0 10%;
+	display: block;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	
+	width: 80%;
+	height: 100%;
+
+	transition: opacity linear 0.3s;
+}
+.icon-sudo-hover:hover{
+	opacity: 1;
+}
+#deskImage {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.icon-sudo-hover div{
+	position: absolute;
+	margin: 0 auto;
+	width: 100px;
+	height: 100px;
+	z-index: 1000;
+	
+
+	top: calc(50% - 50px);
+	background-size: 100px 100px;
+	border-radius: 80px;
+	border: 5px solid black;
+}
+.icon-sudo-hover #person-icon{
+	background-image : url("/static/person.svg");
+	left: calc(25% - 50px);
+} 
+.icon-sudo-hover #comment-icon{
+	background-image: url("/static/bubble.svg");
+	left: calc(50% - 50px);
+}
+.icon-sudo-hover #reload-icon{
+	background-image : url("/static/spin.svg");
+	left: calc(75% - 50px);
+} 
+#nick-name{
+	position: absolute;
+	width: 250px;
+	height: 50px;
+	top: calc(70% - 25px);
+	left: calc(38% - 30px);
+	z-index: 2000;
+	line-height: 50px;
+	padding: 0 auto;
+
+	color: aquamarine;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 40px;
+
+	opacity: 0;
+}
+/*main - end*/
+
+/*footer - start */
+#footer {
+	position: relative;
+	bottom: 0;
+	right: 0;
+
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+
+	color: "526C6A";
+}
+#container-cpr {
+	position: relative; 
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+
+	text-align: center;
+	text-decoration: underline;
+
+	font-family: "Courier New", Courier, monospace;
+}
+/*footer - end*/

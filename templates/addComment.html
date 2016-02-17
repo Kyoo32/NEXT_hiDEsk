@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Next Hide and Desk</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="../static/js/jquery-1.12.0.js"></script>
+   
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    
+    
+   
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+	    <li role="presentation" class="active"><a href="#">Add Comment</a></li>
+            <li role="presentation" ><a href="/logout">Logout</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Next Hide and Desk</h3>
+      </div>
+     <section>
+      <form class="form-horizontal" method="post" action="/addComment">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Leave comment</legend>
+
+<!-- Text input
+<div class="form-group">
+  <label class="col-md-4 control-label" for="txtTitle">Title</label>  
+  <div class="col-md-4">
+  <input id="txtTitle" name="inputTitle" type="text" placeholder="placeholder" class="form-control input-md">
+  </div>
+</div>
+-->
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="txtPost">Post</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="txtPost" name="inputDescription" ></textarea>
+  </div>
+</div>
+
+<input type="hidden" name="desk_id">
+
+<script type="text/javascript" src="../static/js/jquery.cookie.js">
+  var desk = $.cookie("desk_id");
+  document.querySelector("input[name='desk_id']").setAttribute("value", desk);
+</script>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Publish" />
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+</section>
+      <footer class="footer">
+        <p>&copy; Kate 2016</p>
+      </footer>
+
+    </div>
+  </body>
+</html>

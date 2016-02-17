@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <title>Next Hide and Desk</title>
+ 
+ 
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/css/signup.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+ 
+     <script>
+    $(function(){
+        $.ajax({
+            url : '/getComment',
+            type : 'GET',
+            success: function(res){
+                var div = $('<div>')
+    .attr('class', 'list-group')
+    .append($('<a>')
+        .attr('class', 'list-group-item active')
+        .append($('<h4>')
+            .attr('class', 'list-group-item-heading'),
+            $('<p>')
+            .attr('class', 'list-group-item-text')));
+                                
+                var wishObj = JSON.parse(res);
+                var wish = '';
+                
+                $.each(wishObj,function(index, value){
+                    wish = $(div).clone();
+                    $(wish).find('h4').text(value.Title);
+                    $(wish).find('p').text(value.Date);
+                    $('.jumbotron').append(wish);
+                });
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+    });
+
+    
+    </script>
+ 
+</head>
+ 
+<body>
+ 
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation"><a href="/viewDesk">Go gallery</a></li>
+                    <li role="presentation"><a href="/showAddComment">Add Comment</a></li>
+                    <li role="presentation" class="active"><a href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Next Hide and Desk</h3>
+        </div>
+ 
+        <div class="jumbotron">
+            <h1>Go comment to {{owner_name}}!</h1>
+ 
+        </div>
+ 
+ 
+        <footer class="footer">
+            <p>&copy; Kate 2016</p>
+        </footer>
+ 
+    </div>
+</body>
+</html>
