@@ -1,4 +1,4 @@
-    # encoding=utf8 
+# encoding=utf8 
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -260,5 +260,5 @@ def addComment():
 
 
 if __name__ == "__main__":
-	app.run(port=5001)
+	app.run(port=5001, debug=True)
 
