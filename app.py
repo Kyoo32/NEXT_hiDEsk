@@ -61,7 +61,11 @@ def viewDesk():
     cursor = con.cursor()
     cursor.callproc('sp_getDesk')
     desks = cursor.fetchall()
-    desk = random.choice(desks)
+    if desks:
+        desk = random.choice(desks)
+    else:
+         return render_template('error.html', error='No desk yet!')
+
     photo = desk[4]
     desk_num = desk[0]
     session['desk_num'] = desk_num
@@ -71,9 +75,10 @@ def viewDesk():
     cursor.callproc('sp_getUserNickName', (desk[5],))
     user = cursor.fetchall()
     userNickName = user[0]
+
     print(user)
     #user string needs to be changed
-    return render_template('viewDesk.html', desk_id = desk_num, NextDesks =photo, nickName = userNickName )
+    return render_template('viewDesk.html', desk_id=desk_num, NextDesks=photo, nickName=userNickName)
 
 
 @app.route('/showComment')
