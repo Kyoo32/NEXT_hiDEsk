@@ -18,9 +18,9 @@ app = Flask(__name__)
 mysql = MySQL()
 app.secret_key = 'why would I tell you my secret key?'
 
- # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'dbgood'
+# MySQL configurations
+app.config['MYSQL_DATABASE_USER'] = 'DeskUser'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'desk123!@#'
 app.config['MYSQL_DATABASE_DB'] = 'dbDeskProject'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.config['UPLOAD_FOLDER'] = 'static/Uploads'
@@ -31,21 +31,21 @@ mysql.init_app(app)
 
 @app.route("/")
 def main():
-	return render_template('index.html')
+    return render_template('index.html')
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-    	file = request.files['file']
+        file = request.files['file']
         extension = os.path.splitext(file.filename)[1]
-    	f_name = str(uuid.uuid4()) + extension
-    	file.save(os.path.join(app.config['UPLOAD_FOLDER'], f_name))
+        f_name = str(uuid.uuid4()) + extension
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], f_name))
         return json.dumps({'filename':f_name})
 
 
 @app.route("/showSignUp")
 def showSignUp():
-	return render_template('signup.html')
+    return render_template('signup.html')
 
 
 @app.route('/showSignin')
@@ -81,7 +81,7 @@ def showComment():
     if session.get('user'):
         return render_template('comment.html')
     else:
-       return render_template('error.html',error = 'Unauthorized Access')
+        return render_template('error.html',error = 'Unauthorized Access')
 
 @app.route('/showAddComment')
 def showAddComment():
@@ -101,10 +101,10 @@ def getComment():
             wishes_dict = []
             for wish in wishes:
                 wish_dict = {
-                        'Id': wish[0],
-                        'Title': wish[1],
-                        'Date': wish[2],
-                        }
+                    'Id': wish[0],
+                    'Title': wish[1],
+                    'Date': wish[2],
+                }
                 wishes_dict.append(wish_dict)
 
             return json.dumps(wishes_dict)
@@ -118,7 +118,7 @@ def userHome():
     if session.get('user'):
         return render_template('userHome.html', user_name = session.get('user_name'))
     else:
-       return render_template('error.html',error = 'Unauthorized Access')
+        return render_template('error.html',error = 'Unauthorized Access')
 
 @app.route('/logout')
 def logout():
@@ -132,9 +132,9 @@ def validateLogin():
     try:
         _username = request.form['inputEmail']
         _password = request.form['inputPassword']
-        
 
-        
+
+
         # connect to mysql
 
         con = mysql.connect()
@@ -145,15 +145,15 @@ def validateLogin():
 
         if len(data) > 0:
             if check_password_hash(str(data[0][3]),_password):
-               session['user'] = data[0][0]
-               print data
-               session['user_name'] = data[0][1]
-               return redirect('/userHome')
+                session['user'] = data[0][0]
+                print data
+                session['user_name'] = data[0][1]
+                return redirect('/userHome')
             else:
-               return render_template('error.html',error = 'Wrong NikcName or Password.')
+                return render_template('error.html',error = 'Wrong NikcName or Password.')
         else:
             return render_template('error.html',error = 'Wrong Email address or Password.')
-            
+
 
     except Exception as e:
         return render_template('error.html',error = str(e))
@@ -161,34 +161,34 @@ def validateLogin():
         cursor.close()
         con.close()
 
-	
+
 @app.route('/signUp', methods=['POST', 'GET'])
 def signUp():
-	try:
-		_name = request.form['inputName']
-		_nickName = request.form['inputEmail']
-		_password = request.form['inputPassword']
+    try:
+        _name = request.form['inputName']
+        _nickName = request.form['inputEmail']
+        _password = request.form['inputPassword']
 
-		if _name and _nickName and _password:
+        if _name and _nickName and _password:
 
-			conn = mysql.connect()
-			cursor = conn.cursor()
-			_hashed_password = generate_password_hash(_password)
-			cursor.callproc('sp_createUser',(_name,_nickName,_hashed_password))
-			data = cursor.fetchall()
-			if len(data) is 0 :
-				conn.commit()
-				return json.dumps({'message':'User created successfully !'})
-			else:
-				return json.dumps({'error':str(data[0])})
-		else:
-			return json.dumps({'html':'<span>Enter the required fields</span>'})
-			
-	except Exception as e:
-		return json.dumps({'error':str(e)})
-	finally:
-		cursor.close() 
-		conn.close()
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            _hashed_password = generate_password_hash(_password)
+            cursor.callproc('sp_createUser',(_name,_nickName,_hashed_password))
+            data = cursor.fetchall()
+            if len(data) is 0 :
+                conn.commit()
+                return json.dumps({'message':'User created successfully !'})
+            else:
+                return json.dumps({'error':str(data[0])})
+        else:
+            return json.dumps({'html':'<span>Enter the required fields</span>'})
+
+    except Exception as e:
+        return json.dumps({'error':str(e)})
+    finally:
+        cursor.close()
+        conn.close()
 
 
 @app.route('/showAddDesk')
@@ -206,7 +206,7 @@ def addDesk():
                 _filePath = ''
             else:
                 _filePath = request.form.get('filePath')
-          
+
 
             conn = mysql.connect()
             cursor = conn.cursor()
@@ -238,7 +238,7 @@ def addComment():
             _user = session.get('user')
             _desk_id = session.get('desk_num')
             print(_desk_id)
-            
+
             cursor.callproc('sp_addComment',(_title,_desk_id,_user))
             data = cursor.fetchall()
 
@@ -260,5 +260,5 @@ def addComment():
 
 
 if __name__ == "__main__":
-	app.run(port=5001, debug=True)
+    app.run(port=5001, debug=True)
 
