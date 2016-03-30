@@ -138,18 +138,15 @@ def validateLogin():
         _username = request.form['inputEmail']
         _password = request.form['inputPassword']
 
-
-
         # connect to mysql
-
         con = mysql.connect()
         cursor = con.cursor()
-        cursor.callproc('sp_validateLogin',(_username,))
+        cursor.callproc('sp_validateLogin', (_username,))
         data = cursor.fetchall()
         print(data)
 
         if len(data) > 0:
-            if check_password_hash(str(data[0][3]),_password):
+            if check_password_hash(str(data[0][3]), _password):
                 session['user'] = data[0][0]
                 print data
                 session['user_name'] = data[0][1]
