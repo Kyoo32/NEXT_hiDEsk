@@ -23,7 +23,7 @@ app.config['MYSQL_DATABASE_USER'] = 'DeskUser'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'desk123!@#'
 app.config['MYSQL_DATABASE_DB'] = 'dbDeskProject'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['UPLOAD_FOLDER'] = 'static/Uploads'
+app.config['UPLOAD_FOLDER'] = 'static\\Uploads'
 mysql.init_app(app)
 
 
