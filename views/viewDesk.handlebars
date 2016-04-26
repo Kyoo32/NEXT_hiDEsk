@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>hiDEsk</title>
+  <link rel="stylesheet" type="text/css" href="/styles/deskPro.css">
+ <script
+ src="https://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.js"> </script>
+
+</head>
+<body>
+    <!--[header]-->
+	<header id = "header">
+		<div id = "project-name"> NEXT Hide and Desk </div>
+	</header>
+	<!--/[header]-->
+
+	<!--[main]-->
+		<div id="container">
+			<div id="deskImage-container">
+					<img id="deskImage" src = "/upload/2기_고예슬.JPG" name = "{{desk_id}}">
+			</div>
+			<div class="icon-sudo-hover">
+				<div id="person-icon"> </div>
+				<div id="comment-icon"></div>
+				<div id="reload-icon" > </div>
+			</div>
+			<div id="nick-name">{{{nickName}}}</div>
+		</div>
+	<!--/[main]-->
+
+	<!--[footer]-->
+	<footer id="footer">
+		<div id= "container-cpr">
+			made by Kate
+			<a href="https://github.com/Kyoo32/NEXT_hide_and_desk"> ... </a>
+		</div>
+	</footer>
+	<!--/[footer]-->
+
+</body>
+
+	<script type="text/javascript">
+	var iconLoad = document.getElementById("reload-icon");
+	iconLoad.addEventListener("click", function(){
+		location.reload();
+	});
+
+	var iconComment = document.getElementById("comment-icon");
+	iconComment.addEventListener("click", function(){
+		var desk_element = document.getElementById("deskImage");
+		var desk_num = desk_element.getAttribute('name');
+		console.log(desk_num)
+		document.cookie = "desk_id=" + desk_num;
+		window.location = "/showComment";
+
+
+		// $(function setCookie()
+		// {
+		// 	// value to set in the cookie
+
+
+		// 	// sets the cookie
+		// 	$.cookie('desk_id', desk_num);
+		// 	//console.log($.cookie());
+		// 	//log('Cookie ' + desk_num + ' has been set.');
+		// });
+
+	});
+
+
+	var iconName = document.getElementById("person-icon");
+	iconName.addEventListener("click", function(){
+		var target = iconName.parentNode.parentNode.querySelector('#nick-name');
+		console.log(target);
+		if(target.style.opacity == "" || target.style.opacity == "0" ){
+			target.style.opacity = "1";
+		}else {
+			target.style.opacity = "0";
+		}
+	});
+	</script>
+
+
+</html>
