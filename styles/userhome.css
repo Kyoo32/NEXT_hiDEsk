@@ -1,0 +1,14 @@
+
+
+
+.btn-new-desk-post{
+  	position: fixed;
+    right : 40px;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.container{
+  position: relative;
+}

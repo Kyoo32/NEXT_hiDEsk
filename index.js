@@ -23,28 +23,35 @@ app.set('port', process.env.PORT || 8080);
 app.get('/', function(req, res){
   res.render('indexDesk');
 });
-app.get('/viewDesk', function(req,res){
-  res.render('indexDesk', {nickName : req.session.login_id});
-});
+// app.get('/viewDesk', function(req,res){
+//   res.render('indexDesk', {nickName : req.session.login_id});
+// });
 app.get('/showSignUp', function(req, res){
   res.render('signup');
 });
 app.get('/showSignin', function(req, res){
     if(req.session.login_ok =='yes'){
-          res.redirect('/userhome');
+          res.redirect('/randomDesk');
         } else {
           res.render('signin');
         }
 });
+
 app.post('/validateLogin', function(req,res){
   req.session.login_ok = 'yes';
   req.session.login_id = req.body.inputEmail;
-  res.redirect('/userhome');
-});
-app.get('/userhome', function(req, res){
-  res.render('userHome',{user_name : req.session.login_id} )
+  res.redirect('/randomDesk');
 });
 
+app.get('/randomDesk',function(req, res){
+  res.render('randomDesk');
+});
+app.get('/myPage', function(req, res){
+  res.render('userHome',{user_name : req.session.login_id} )
+});
+app.get('/postNewDesk', function(req, res){
+  res.render('postNewDesk');
+});
 
 app.get('/logout', function(req, res){
   req.session.destroy();
