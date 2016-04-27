@@ -6,16 +6,15 @@
   <title>hiDEsk</title>
   <link href="/styles/bootstrap.min.css" rel="stylesheet">
   <link href="/styles/jumbotron-narrow.css" rel="stylesheet">
-    <script src="../static/js/jquery-1.12.0.js"></script>
+    <!-- <script src="../static/js/jquery-1.12.0.js"></script>
     <script src="../static/js/jquery.ui.widget.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.fileupload/9.9.0/js/jquery.fileupload.js"></script>
     <script type="text/javascript" src="
 https://cdn.jsdelivr.net/jquery.fileupload/9.9.0/js/jquery.fileupload-process.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.fileupload/9.9.0/js/jquery.fileupload-ui.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.fileupload/9.9.0/js/jquery.fileupload-ui.js"></script> -->
 
-
-    <script>
+    <!-- <script>
         $(function(){
                 $('#fileupload').fileupload({
                     url: 'upload',
@@ -35,8 +34,8 @@ https://cdn.jsdelivr.net/jquery.fileupload/9.9.0/js/jquery.fileupload-process.js
                     }
                 });
         })
-    </script>
-        <style>
+    </script> -->
+    <style>
     .btn-file {
     position: relative;
     overflow: hidden;
@@ -57,11 +56,8 @@ https://cdn.jsdelivr.net/jquery.fileupload/9.9.0/js/jquery.fileupload-process.js
         display: block;
     }
     </style>
-
 </head>
-
 <body>
-
     <div class="container">
         <div class="header">
             <nav>
@@ -72,74 +68,51 @@ https://cdn.jsdelivr.net/jquery.fileupload/9.9.0/js/jquery.fileupload-process.js
                     </li> -->
                 </ul>
             </nav>
-            <h3 class="text-muted">hiDEsk</h3>
-        </div>
-
-
-
+            <h3 class="text-muted"><a href="/" style=" text-decoration:none">hiDEsk</a></h3>
+          </div>
     <div class="well">
-      <form role="form" method="post" action="/addDesk">
-
-
-<!-- Form Name -->
-<legend>ADD Your Desk</legend>
-
-<!-- Text input-->
-<div class="form-group">
-  <label  for="txtTitle">Title</label>
-
-  <input id="txtTitle" name="inputTitle" type="text" placeholder="placeholder" class="form-control input-md">
-
-</div>
-
-                    <!-- Textarea
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="txtPost">Post</label>
-                        <div class="col-md-4">
-                            <input type="file" name="pic" accept="image/*">
-
-                            <textarea class="form-control" id="txtPost" name="inputDescription"></textarea>
-                        </div>
-                    </div> -->
-
-                <div class="form-group">
-
-                  <label for="txtPost">Photos</label>
-
-                <div class="input-group">
-                                <span class="input-group-btn">
-                                    <span class="btn btn-primary btn-file">
-                                        Browse&hellip; <input type="file" id="fileupload" name="file" multiple>
-                                    </span>
-                                </span>
-                        <div class="pull-right">
-                                <img  id="imgUpload" style="width: 140px; height: 140px;" class="img-thumbnail"><input type="hidden" name="filePath" id="filePath"></input>
-                        </div>
-                            </div>
-
-                </div>
-
-
-
-                  <!-- Button -->
-<div class="form-group">
-
-    <p class="text-center">
-    <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Publish" />
-    </p>
-</div>
-
-
-       </form>
-
-</div>
-
-
-        <footer class="footer">
-            <p>&copy; Kate 2016</p>
-        </footer>
-
+      <form role="form" action = "/upload_do" method = "post" enctype = "multipart/form-data" >
+      <!-- Form Name -->
+      <legend>ADD Your Desk</legend>
+      <!-- Text input-->
+      <div class="form-group">
+        <label  for="txtTitle">Title</label>
+        <input id="txtTitle" name="inputTitle" type="text" placeholder="placeholder" class="form-control input-md">
+      </div>
+      <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="txtPost">Post</label>
+          <div class="col-md-4">
+              <input type="file" name="pic" accept="image/*">
+              <textarea class="form-control input-md" id="txtPost" name="inputDescription"></textarea>
+          </div>
+      </div> -->
+      <div class="form-group">
+        <label for="txtPost">Photo</label>
+        <div class="input-group">
+           <!-- <span class="input-group-btn"> -->
+              <!-- <span class="btn btn-primary btn-file"> Browse -->
+              <input type="file" id="fileupload" name="file"accept="image/" > <!--multiple-->
+              <!-- </span> -->
+            <!-- </span> -->
+            <div class="pull-right">
+            <img  id="imgUpload" style="width: 40vw; height: 30vw;" class="img-thumbnail"><input type="hidden" name="filePath" id="filePath"></input>
+            </div>
+        </div>
+      </div>
+      <!-- Button -->
+      <div class="form-group">
+          <p class="text-center">
+            <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Publish" />
+          </p>
+      </div>
+      </form>
     </div>
+
+    <footer class="footer">
+        <p>&copy; Kate 2016</p>
+    </footer>
+
+  </div>
 </body>
 
 </html>
