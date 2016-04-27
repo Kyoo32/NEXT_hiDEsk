@@ -12,6 +12,8 @@
     "body-parser": "^1.15.0",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.13.0",
-    "handlebars": "^4.0.5"
+    "handlebars": "^4.0.5",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.0"
   }
 }
