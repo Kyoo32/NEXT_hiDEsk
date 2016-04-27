@@ -127,20 +127,6 @@ app.get('/upload_not', function(req, res){
   res.send('loginNot');
 });
 
-app.use(function(req, res){
-  res.type('text/plain');
-  res.status('404');
-  res.send('404 - Not Found');
-});
-
-app.use(function(err, req, res, next){
-  console.error(err.stack);
-  res.type('text/plain');
-  res.status('500');
-  res.send('500 - Server Error');
-});
-
-
 app.post('/validateLogin', function(req,res){
   console.log(req.body);
   var userInputEmail = req.body.inputEmail;
@@ -180,6 +166,19 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
+
+app.use(function(req, res){
+  res.type('text/plain');
+  res.status('404');
+  res.send('404 - Not Found');
+});
+
+app.use(function(err, req, res, next){
+  console.error(err.stack);
+  res.type('text/plain');
+  res.status('500');
+  res.send('500 - Server Error');
+});
 
 app.listen(app.get('port'), function(){
   console.log('Express started on http://locathost' + app.get('port') + ': press Ctrl + C to terminate');
