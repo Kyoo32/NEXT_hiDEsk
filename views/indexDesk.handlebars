@@ -18,10 +18,15 @@
                 <ul class="nav nav-pills pull-right">
                   <!--  <li role="presentation" class="active"><a href="#">Home</a>
                   </li> -->
+                  {{#if login_status}}
+                    <li role="presentation"><a href="/myPage">My Desks</a></li>
+                    <li role="presentation"><a href="/logout">Logout</a></li>
+                  {{else}}
                     <li role="presentation"><a href="showSignin">Sign In</a>
                     </li>
                     <li role="presentation"><a href="showSignUp">Sign Up</a>
                     </li>
+                  {{/if}}
                 </ul>
             </nav>
             <h3 class="text-muted" ><a href="/" style=" text-decoration:none">hiDEsk</a></h3>
