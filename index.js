@@ -2,6 +2,7 @@ var express =require('express');
 var session = require('express-session');
 var formidable = require('formidable');
 var app = express();
+
 //
 /***************facebook login ***************/
 var passport = require('passport')
@@ -23,7 +24,7 @@ passport.deserializeUser(function (user, done){
 passport.use(
   new FacebookStrategy({
     clientID:'1567820353510162',
-    clientSecret: '2f35c66fd2c3f91235a697015079acaa',
+    clientSecret:'2f35c66fd2c3f91235a697015079acaa',
     callbackURL: "http://localhost:8080/auth/facebook/callback",
     auth_type: "reauthenticate",
     profileFields: ['id', 'emails', 'name', 'gender', 'displayName']
@@ -31,6 +32,7 @@ passport.use(
   function (accessToken, refreshToken, profile, done){
     console.log(profile);
     done(null, profile);
+    return cb(null, profile);
   }
 ));
 
