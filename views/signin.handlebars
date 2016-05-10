@@ -5,9 +5,10 @@
     <title>hiDEsk</title>
     <link href="/styles/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/jumbotron-narrow.css" rel="stylesheet">
-    <link href="../static/css/signup.css" rel="stylesheet">
+    <link href="/styles/mySnsLoginBtnPadding.css" rel="stylesheet">
+    <!-- <link href="../static/css/signup.css" rel="stylesheet">
     <script src="../static/js/jquery-1.12.0.js"></script>
-    <script src="../static/js/signin.js"></script>
+    <script src="../static/js/signin.js"></script> -->
   </head>
 
   <body>
@@ -34,10 +35,20 @@
 
         <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
-      <div>
+      <div class ="costyle = "float:left width:49"l-lg-6">
+        <h4 style="visibility : hidden" 여백의 미 </h4>
+      </div>
+      <div class="row">
+      <div class="col-xs-6" id="leftButton">
         <form class="form-signin" action="/auth/facebook" method="GET">
-          <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit" value="fb">by facebook </button>
+          <button id="btnSignIn facebookSize" class="btn btn-lg btn-primary btn-block" type="submit" value="fb">by Facebook</button>
         </form>
+      </div>
+      <div class="col-xs-6" id="rightButton">
+        <form class="form-signin" action="/auth/naver" method="GET">
+          <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit" value="fb">by Naver</button>
+        </form>
+      </div>
       </div>
       </div>
 

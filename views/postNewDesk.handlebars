@@ -24,7 +24,7 @@ https://cdn.jsdelivr.net/jquery.fileupload/9.9.0/js/jquery.fileupload-process.js
                     },
                     success:function(response,status) {
                     console.log(response.filename);
-                    var filePath = 'static/Uploads/' + response.filename;
+                    var filePath = '/upload/' + response.filename;
                     $('#imgUpload').attr('src',filePath);
                     $('#filePath').val(filePath);
                         console.log('success');
@@ -34,7 +34,7 @@ https://cdn.jsdelivr.net/jquery.fileupload/9.9.0/js/jquery.fileupload-process.js
                     }
                 });
         })
-    </script> -->
+    </script>
     <style>
     .btn-file {
     position: relative;
@@ -55,7 +55,7 @@ https://cdn.jsdelivr.net/jquery.fileupload/9.9.0/js/jquery.fileupload-process.js
         cursor: inherit;
         display: block;
     }
-    </style>
+    </style> -->
 </head>
 <body>
     <div class="container">

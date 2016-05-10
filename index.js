@@ -1,8 +1,20 @@
 var express =require('express');
 var session = require('express-session');
+//var login_route = require('./routers/userlogin');
 var formidable = require('formidable');
 var app = express();
-//
+
+var bodyparser = require('body-parser').urlencoded({extended : true});
+app.use(bodyparser);
+
+app.use('/styles', express.static(__dirname + '/styles'));
+app.use('/upload', express.static(__dirname + '/upload'));
+//app.use('/log', login_route);
+var handlebars = require('express-handlebars').create({defaultlayout:'main'});
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
+app.set('port', process.env.PORT || 8080);
+
 /***************facebook login ***************/
 var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
@@ -22,9 +34,9 @@ passport.deserializeUser(function (user, done){
 
 passport.use(
   new FacebookStrategy({
-    clientID:'1567820353510162',
-    clientSecret: '2f35c66fd2c3f91235a697015079acaa',
-    callbackURL: "http://localhost:8080/auth/facebook/callback",
+    clientID:'?',
+    clientSecret: '?',
+    callbackURL: "?",
     auth_type: "reauthenticate",
     profileFields: ['id', 'emails', 'name', 'gender', 'displayName']
   },
@@ -35,10 +47,11 @@ passport.use(
 ));
 
 app.use(session({
-  secret : "secret",
+  secret : "?",
   resave : false,
   saveUninitialized : true
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -50,19 +63,41 @@ var loginCheck = function (req, res, next) {
   next();
 };
 app.use(loginCheck);
-
 /*****************************************/
 
-var bodyparser = require('body-parser').urlencoded({extended : true});
-app.use(bodyparser);
+var NaverStrategy = require('passport-naver').Strategy;
+// passport.serializeUser(function(user, done) {
+//     done(null, user);
+// });
+//
+// passport.deserializeUser(function(obj, done) {
+//     done(null, obj);
+// });
 
-app.use('/styles', express.static(__dirname + '/styles'));
-app.use('/upload', express.static(__dirname + '/upload'));
+passport.use(new NaverStrategy({
+    clientID: '?',
+    clientSecret: '?',
+    callbackURL: "?",
+    svcType: 0  // optional. see http://gamedev.naver.com/index.php/%EC%98%A8%EB%9D%BC%EC%9D%B8%EA%B2%8C%EC%9E%84:OAuth_2.0_API
+}, function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+        console.log("profile=");
+        console.log(profile);
+        // data to be saved in DB
+        user = {
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            username: profile.displayName,
+            provider: 'naver',
+            naver: profile._json
+        };
+        //console.log("user=");
+        //console.log(user);
+        return done(null, profile);
+    });
+}));
 
-var handlebars = require('express-handlebars').create({defaultlayout:'main'});
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
-app.set('port', process.env.PORT || 8080);
+
 
 app.get('/', function(req, res){
   res.render('indexDesk', {login_status : login_tpl});
@@ -84,6 +119,25 @@ app.get('/showSignin', function(req, res){
       res.render('signin');
     }
 });
+
+
+app.get('/login_success', ensureAuthenticated, function (req, res){
+  req.session.login_ok = 'yes';
+  req.session.login_id = req.user.emails[0].value;
+  res.redirect('/randomDesk');
+});
+
+app.get('/login_fail', function(req, res){
+  console.log('login fail');
+  res.redirect('/');
+});
+
+app.get('/logout', function(req, res){
+  req.session.destroy();
+  req.logout();
+  res.redirect('/');
+});
+
 
 app.get('/myPage', function(req, res){
   res.render('userHome', {user_name : req.session.login_id} )
@@ -149,24 +203,28 @@ app.get('/auth/facebook/callback',
     failureRedirect: '/login_fail'
   })
 );
-app.get('/login_success', ensureAuthenticated, function (req, res){
-  req.session.login_ok = 'yes';
-  req.session.login_id = req.user.emails[0].value;
-  res.redirect('/randomDesk');
-});
 
-app.get('/login_fail', function(req, res){
-  console.log('login fail');
-  res.redirect('/');
-});
+// Setting the naver oauth routes
+app.get('/auth/naver',
+  passport.authenticate('naver', {
+    scope: ['email']
+  }, function(req, res) {
+        console.log('/auth/naver failed, stopped');
+      })
+);
+// creates an account if no account of the new user
+app.get('/auth/naver/callback',
+    passport.authenticate('naver', {
+        successRedirect: '/login_success',
+        failureRedirect: '/login_fail'
+    }, function(req, res) {
+        res.redirect('/');
+})
+);
 
-app.get('/logout', function(req, res){
-  req.session.destroy();
-  req.logout();
-  res.redirect('/');
-});
 
 
+/****** 400, 500 처리 ******/
 app.use(function(req, res){
   res.type('text/plain');
   res.status('404');
@@ -179,10 +237,8 @@ app.use(function(err, req, res, next){
   res.status('500');
   res.send('500 - Server Error');
 });
+/****************************/
 
-app.listen(app.get('port'), function(){
-  console.log('Express started on http://locathost' + app.get('port') + ': press Ctrl + C to terminate');
-});
 
 function ensureAuthenticated(req, res, next){
   console.log("USER ::");
@@ -197,3 +253,7 @@ function ensureAuthenticated(req, res, next){
     res.redirect('/');
   }
 }
+
+app.listen(app.get('port'), function(){
+  console.log('Express started on http://locathost' + app.get('port') + ': press Ctrl + C to terminate');
+});
