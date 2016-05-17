@@ -5,9 +5,10 @@
     <title>hiDEsk</title>
     <link href="/styles/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/jumbotron-narrow.css" rel="stylesheet">
-    <link href="../static/css/signup.css" rel="stylesheet">
-    <script src="../static/js/jquery-1.12.0.js"></script>
-    <script src="../static/js/signUp.js"></script>
+    <link href="/styles/mySnsLoginBtnPadding.css" rel="stylesheet">
+    <!-- <link href="../static/css/signup.css" rel="stylesheet"> -->
+    <!-- <script src="../static/js/jquery-1.12.0.js"></script>
+    <script src="../static/js/signUp.js"></script> -->
 
   </head>
 
@@ -27,16 +28,35 @@
 
       <div class="jumbotron">
         <h1>Make your account </h1>
-        <form class="form-signin">
-        <label for="inputName" class="sr-only">Name</label>
-        <input type="name" name="inputName" id="inputName" class="form-control" placeholder="Name" required autofocus>
-        <label for="inputEmail" class="sr-only">NickName</label>
-        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="NickName" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+        <form class="form-signin" action="/log/signup" method="post">
 
-        <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">Sign up</button>
-      </form>
+          <label for="inputEmail" class="sr-only">Email</label>
+          <input type="text " name="inputEmail" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+          <label for="inputNickname" class="sr-only">NickName</label>
+          <input type="text " name="inputNickname" id="inputNickname" class="form-control" placeholder="Nickname" required autofocus>
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+
+          <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+        </form>
+        <div class ="col-lg-12">
+          <h4> {{{result}}}</h4>
+        </div>
+        <div class ="col-lg-6" style = "float:left width:49">
+          <h4 style="visibility : hidden" 여백의 미 </h4>
+        </div>
+        <div class="row">
+        <div class="col-xs-6" id="leftButton">
+          <form class="form-signin" action="/auth/facebook" method="GET">
+            <button id="btnSignIn facebookSize" class="btn btn-lg btn-primary btn-block" type="submit" value="fb">by Facebook</button>
+          </form>
+        </div>
+        <div class="col-xs-6" id="rightButton">
+          <form class="form-signin" action="/auth/naver" method="GET">
+            <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit" value="fb">by Naver</button>
+          </form>
+        </div>
+        </div>
         <label id="result"><label>
       </div>
 

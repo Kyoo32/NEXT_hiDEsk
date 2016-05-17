@@ -27,15 +27,18 @@
 
       <div class="jumbotron">
         <h1>Show your Desk!</h1>
-        <form class="form-signin" action="/validateLogin" method="post">
+        <form class="form-signin" action="/log/validate" method="post">
         <label for="inputEmail" class="sr-only">Nickname</label>
-        <input type="text " name="inputEmail" id="inputEmail" class="form-control" placeholder="Nick Name" required autofocus>
+        <input type="text " name="inputEmail" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
 
         <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-      <div class ="costyle = "float:left width:49"l-lg-6">
+        </form>
+        <div class ="col-lg-12">
+          <h4> {{{result}}}</h4>
+        </div>
+      <div class ="col-lg-6" style = "float:left width:49">
         <h4 style="visibility : hidden" 여백의 미 </h4>
       </div>
       <div class="row">
@@ -51,8 +54,6 @@
       </div>
       </div>
       </div>
-
-
 
       <footer class="footer">
         <p>&copy; Kate 2016</p>
